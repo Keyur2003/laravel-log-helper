@@ -1,28 +1,50 @@
 # Laravel Log Helper
 
-A VS Code extension to quickly log variables in Laravel Laravel projects.
+A **Visual Studio Code Extension** designed to streamline debugging in **Laravel** projects by quickly logging variables using `\Log::info()`.
 
-## Features
+## 🚀 Features
 
-- Logs selected variables with `\Log::info($variable)`.
-- Automatically adds `$` to the variable name if missing.
-- Keyboard shortcut: `Ctrl+Alt+L` (Windows/Linux) or `Cmd+Alt+L` (macOS).
+- Instantly log selected variables with `\Log::info($variable);`.
+- Automatically adds `$` to variable names if missing.
+- **Keyboard Shortcut:**
+  - **Windows/Linux:** `Ctrl + Alt + L`
+  - **macOS:** `Cmd + Alt + L`
 
-## Usage
+## 📌 Usage
 
-1. Select a variable in your Laravel file.
-2. Press `Ctrl+Alt+L` (or `Cmd+Alt+L` on macOS).
-3. The extension will append `\Log::info($variable)` below the selected variable.
+1. Select a variable in your Laravel project.
+2. Press `Ctrl + Alt + L` (or `Cmd + Alt + L` on macOS).
+3. The extension will append `\Log::info($variable);` below the selected variable, maintaining the proper indentation.
 
-## Installation
+## 🔧 Installation
 
-1. Install the extension from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/).
-2. Reload VS Code to activate the extension.
+1. Install the extension from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=KeyurSanghani.laravel-log-helper).
+2. Reload Visual Studio Code to activate the extension.
 
-## Contributing
+## 💡 Example
 
-Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/your-repo-url).
+### Before
+```php
+$user = Auth::user();
+```
 
-## License
+### After pressing the shortcut
+```php
+$user = Auth::user();
+\Log::info($user);
+```
 
-This project is licensed under the MIT License.
+## 📢 Contributing
+
+We welcome contributions! If you'd like to improve this extension:
+
+- Open an issue or submit a pull request on [GitHub](https://github.com/Keyur2003/laravel-log-helper.git).
+- Ensure your code follows best practices and is well-documented.
+
+## 📜 License
+
+This project is open-source and licensed under the [MIT License](LICENSE).
+
+---
+
+**Developed with ❤️ by [Keyur Sanghani](https://github.com/Keyur2003)**
