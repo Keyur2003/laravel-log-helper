@@ -12,6 +12,9 @@
     "vscode": "^1.96.0"
   },
   "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:laravel-log-helper.logVariable"
+  ],
   "contributes": {
     "commands": [
       {

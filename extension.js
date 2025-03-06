@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 
 function activate(context) {
-    let disposable = vscode.commands.registerCommand('php-log-helper.logVariable', function () {
+    let disposable = vscode.commands.registerCommand('laravel-log-helper.logVariable', function () {
         const editor = vscode.window.activeTextEditor;
 
         if (editor) {
