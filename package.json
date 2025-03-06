@@ -2,7 +2,7 @@
   "name": "laravel-log-helper",
   "displayName": "Laravel Log Helper",
   "description": "A helper to log variables in Laravel.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "KeyurSanghani",
   "repository": {
     "type": "git",
