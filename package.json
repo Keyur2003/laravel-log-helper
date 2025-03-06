@@ -1,0 +1,27 @@
+{
+  "name": "laravel-log-helper",
+  "displayName": "Laravel Log Helper",
+  "description": "A helper to log variables in Laravel.",
+  "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.96.0" 
+  },
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "laravel-log-helper.logVariable",
+        "title": "Log Variable"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "laravel-log-helper.logVariable",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus"
+      }
+    ]
+  }
+}
