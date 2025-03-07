@@ -7,13 +7,13 @@ A **Visual Studio Code Extension** designed to streamline debugging in **Laravel
 - Instantly log selected variables with `\Log::info($variable);`.
 - Automatically adds `$` to variable names if missing.
 - **Keyboard Shortcut:**
-  - **Windows/Linux:** `Ctrl + Alt + L`
-  - **macOS:** `Cmd + Alt + L`
+  - **Windows/Linux:** `Ctrl + Shift + L`
+  - **macOS:** `Cmd + Shift + L`
 
 ## 📌 Usage
 
 1. Select a variable in your Laravel project.
-2. Press `Ctrl + Alt + L` (or `Cmd + Alt + L` on macOS).
+2. Press `Ctrl + Shift + L` (or `Cmd + Shift + L` on macOS).
 3. The extension will append `\Log::info($variable);` below the selected variable, maintaining the proper indentation.
 
 ## 🔧 Installation
