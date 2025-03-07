@@ -9,6 +9,7 @@ function activate(context) {
             const selectedText = editor.document.getText(selection);
 
             let logStatement;
+            let cursorOffsetFromLogStart = -1; // Track where to position the cursor
 
             if (selectedText.trim() === '') {
                 // If nothing is selected, check if the cursor is on a variable or inside a string
@@ -45,6 +46,7 @@ function activate(context) {
                     } else {
                         // If no variable is under the cursor, insert a basic log statement
                         logStatement = `\\Log::info("");`;
+                        cursorOffsetFromLogStart = 12; // Position cursor BETWEEN quotes: "\" counts as 1 char
                     }
                 }
             } else {
@@ -73,6 +75,17 @@ function activate(context) {
             // Insert the log statement with the same indentation
             editor.edit((editBuilder) => {
                 editBuilder.insert(position, `${indentation}${logStatement}\n`);
+            }).then(success => {
+                if (success && cursorOffsetFromLogStart > -1) {
+                    // If cursor needs to be placed between quotes
+                    const newPosition = new vscode.Position(
+                        position.line, 
+                        indentation.length + cursorOffsetFromLogStart
+                    );
+                    
+                    // Set the new cursor position
+                    editor.selection = new vscode.Selection(newPosition, newPosition);
+                }
             });
         }
     });
