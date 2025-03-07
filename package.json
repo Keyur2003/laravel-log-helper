@@ -2,7 +2,7 @@
   "name": "laravel-log-helper",
   "displayName": "Laravel Log Helper",
   "description": "A helper to log variables in Laravel.",
-  "version": "0.2.1",
+  "version": "2.0.1",
   "publisher": "KeyurSanghani",
   "repository": {
     "type": "git",
@@ -20,7 +20,11 @@
       {
         "command": "laravel-log-helper.logVariable",
         "title": "Log Variable"
-      }
+      },
+      {
+        "command": "laravel-log-helper.ddVariable",
+        "title": "DD Variable"
+    }
     ],
     "keybindings": [
       {
@@ -28,7 +32,13 @@
         "key": "ctrl+shift+l",
         "mac": "cmd+shift+l",
         "when": "editorTextFocus"
-      }
+      },
+      {
+        "command": "laravel-log-helper.ddVariable",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus"
+    }
     ]
   }
 }
