@@ -1,8 +1,8 @@
 {
-  "name": "laravel-log-helper",
-  "displayName": "Laravel Log Helper",
-  "description": "A helper to log variables in Laravel.",
-  "version": "2.0.2",
+  "name": "laravel-debug-buddy",
+  "displayName": "Laravel Debug Buddy",
+  "description": "A powerful helper for debugging Laravel code with instant logging and dumping.",
+  "version": "2.0.3",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
@@ -13,29 +13,26 @@
     "vscode": "^1.96.0"
   },
   "main": "./extension.js",
-  "activationEvents": [
-    "onCommand:laravel-log-helper.logVariable"
-  ],
   "contributes": {
     "commands": [
       {
-        "command": "laravel-log-helper.logVariable",
+        "command": "laravel-debug-buddy.logVariable",
         "title": "Log Variable"
       },
       {
-        "command": "laravel-log-helper.ddVariable",
+        "command": "laravel-debug-buddy.ddVariable",
         "title": "DD Variable"
     }
     ],
     "keybindings": [
       {
-        "command": "laravel-log-helper.logVariable",
+        "command": "laravel-debug-buddy.logVariable",
         "key": "ctrl+shift+l",
         "mac": "cmd+shift+l",
         "when": "editorTextFocus"
       },
       {
-        "command": "laravel-log-helper.ddVariable",
+        "command": "laravel-debug-buddy.ddVariable",
         "key": "ctrl+shift+d",
         "mac": "cmd+shift+d",
         "when": "editorTextFocus"

@@ -2,9 +2,9 @@ const vscode = require('vscode');
 
 function activate(context) {
     
-    let disposableLog = vscode.commands.registerCommand('laravel-log-helper.logVariable', logVariable);
+    let disposableLog = vscode.commands.registerCommand('laravel-debug-buddy.logVariable', logVariable);
 
-    let disposableDd = vscode.commands.registerCommand('laravel-log-helper.ddVariable', ddVariable);
+    let disposableDd = vscode.commands.registerCommand('laravel-debug-buddy.ddVariable', ddVariable);
 
     context.subscriptions.push(disposableLog, disposableDd);
 }

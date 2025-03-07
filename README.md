@@ -1,4 +1,4 @@
-# Laravel Log Helper
+# Laravel Debug Buddy
 
 A **Visual Studio Code Extension** designed to streamline debugging in **Laravel** projects by quickly logging variables using `\Log::info()` and `dd()`.
 
