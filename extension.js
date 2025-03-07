@@ -14,15 +14,20 @@ function activate(context) {
                 // If nothing is selected, insert a basic log statement
                 logStatement = `\\Log::info("");`;
             } else {
-                let variableName = selectedText.trim();
+                // Extract all variables from the selected text
+                const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
+                const variables = selectedText.match(variableRegex) || [];
 
-                // Add $ if it's missing and the selected text is not an array-like structure
-                if (variableName && !variableName.startsWith('$')) {
-                    variableName = `$${variableName}`;
+                if (variables.length > 1) {
+                    // If multiple variables are found, log them as an array
+                    logStatement = `\\Log::info([${variables.join(', ')}]);`;
+                } else if (variables.length === 1) {
+                    // If only one variable is found, log it directly
+                    logStatement = `\\Log::info(${variables[0]});`;
+                } else {
+                    // If no variables are found, log the selected text as a string
+                    logStatement = `\\Log::info('${selectedText.trim()}');`;
                 }
-
-                // Create the log statement with the selected variable
-                logStatement = `\\Log::info(${variableName});`;
             }
 
             // Get the position to insert the log statement
