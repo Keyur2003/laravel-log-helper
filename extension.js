@@ -8,46 +8,32 @@ function activate(context) {
             const selection = editor.selection;
             const selectedText = editor.document.getText(selection);
 
-            let logStatements = [];
+            let logStatement;
 
             if (selectedText.trim() === '') {
-                // If nothing is selected, log an empty statement
-                logStatements.push(`\\Log::info("");`);
+                // If nothing is selected, insert a basic log statement
+                logStatement = `\\Log::info("");`;
             } else {
-                // Split the selected text by commas and trim each variable
-                const variables = selectedText.split(',').map(v => v.trim());
+                let variableName = selectedText.trim();
 
-                // Process each variable
-                variables.forEach(variable => {
-                    let variableName = variable.trim();
+                // Add $ if it's missing and the selected text is not an array-like structure
+                if (variableName && !variableName.startsWith('$')) {
+                    variableName = `$${variableName}`;
+                }
 
-                    // Add $ if it's missing and the selected text is not an array-like structure
-                    if (!variableName.startsWith('$') && !variableName.startsWith('[')) {
-                        variableName = `$${variableName}`;
-                    }
-
-                    // Create the log statement for the variable
-                    logStatements.push(`\\Log::info('${variableName}: ', ${variableName});`);
-                });
+                // Create the log statement with the selected variable
+                logStatement = `\\Log::info(${variableName});`;
             }
 
-            // Get the current cursor position
-            const cursorPosition = selection.active;
-
-            // Find the end of the current scope
-            const endOfScopePosition = findEndOfScope(editor.document, cursorPosition);
-
-            // Get the indentation of the current scope
-            const line = editor.document.lineAt(endOfScopePosition.line);
+            // Get the position to insert the log statement
+            const line = editor.document.lineAt(selection.start.line);
             const indentation = line.text.substring(0, line.firstNonWhitespaceCharacterIndex);
 
-            // Insert the log statements just before the end of the scope
-            const insertPosition = new vscode.Position(endOfScopePosition.line, 0);
+            const position = new vscode.Position(selection.end.line + 1, 0);
 
+            // Insert the log statement with the same indentation
             editor.edit((editBuilder) => {
-                logStatements.forEach(logStatement => {
-                    editBuilder.insert(insertPosition, `${indentation}${logStatement}\n`);
-                });
+                editBuilder.insert(position, `${indentation}${logStatement}\n`);
             });
         }
     });
@@ -56,40 +42,6 @@ function activate(context) {
 }
 
 function deactivate() {}
-
-/**
- * Finds the end of the current scope in PHP code (e.g., the closing brace) based on the cursor position.
- * @param {vscode.TextDocument} document - The active text document.
- * @param {vscode.Position} cursorPosition - The current cursor position.
- * @returns {vscode.Position} - The position of the end of the current scope.
- */
-function findEndOfScope(document, cursorPosition) {
-    let depth = 0;
-    let line = cursorPosition.line;
-
-    // Start from the current line and search downwards
-    while (line < document.lineCount) {
-        const text = document.lineAt(line).text;
-
-        // Count opening and closing braces to determine scope depth
-        for (let i = 0; i < text.length; i++) {
-            if (text[i] === '{') {
-                depth++;
-            } else if (text[i] === '}') {
-                depth--;
-                if (depth === 0) {
-                    // Found the end of the current scope
-                    return new vscode.Position(line, i);
-                }
-            }
-        }
-
-        line++;
-    }
-
-    // If no scope is found, return the end of the document
-    return new vscode.Position(document.lineCount - 1, 0);
-}
 
 module.exports = {
     activate,
