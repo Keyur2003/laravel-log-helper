@@ -11,8 +11,42 @@ function activate(context) {
             let logStatement;
 
             if (selectedText.trim() === '') {
-                // If nothing is selected, insert a basic log statement
-                logStatement = `\\Log::info("");`;
+                // If nothing is selected, check if the cursor is on a variable or inside a string
+                const cursorPosition = selection.active;
+                const document = editor.document;
+                const lineText = document.lineAt(cursorPosition.line).text;
+
+                // Check if the cursor is inside a string (enclosed by ", ', or `)
+                const stringRegex = /(["'`])(?:(?=(\\?))\2.)*?\1/g;
+                let stringMatch;
+                let isInsideString = false;
+
+                while ((stringMatch = stringRegex.exec(lineText)) !== null) {
+                    const start = stringMatch.index;
+                    const end = start + stringMatch[0].length;
+
+                    if (cursorPosition.character >= start && cursorPosition.character <= end) {
+                        // Cursor is inside this string
+                        isInsideString = true;
+                        const stringContent = stringMatch[0];
+                        logStatement = `\\Log::info(${stringContent});`;
+                        break;
+                    }
+                }
+
+                if (!isInsideString) {
+                    // If not inside a string, check if the cursor is on a variable
+                    const wordRange = document.getWordRangeAtPosition(cursorPosition, /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/);
+
+                    if (wordRange) {
+                        // If the cursor is on a variable, log it
+                        const variable = document.getText(wordRange);
+                        logStatement = `\\Log::info(${variable});`;
+                    } else {
+                        // If no variable is under the cursor, insert a basic log statement
+                        logStatement = `\\Log::info("");`;
+                    }
+                }
             } else {
                 // Extract all variables from the selected text
                 const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
