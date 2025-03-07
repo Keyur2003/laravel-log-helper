@@ -65,19 +65,26 @@ function ddVariable() {
                 }
             }
         } else {
-            // Extract all variables from the selected text
-            const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
-            const variables = selectedText.match(variableRegex) || [];
-
-            if (variables.length > 1) {
-                // If multiple variables are found, log them as an array
-                ddStatement = `dd([${variables.join(', ')}]);`;
-            } else if (variables.length === 1) {
-                // If only one variable is found, log it directly
-                ddStatement = `dd(${variables[0]});`;
+            // Check if the selected text is a valid variable name
+            const variableRegex = /^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
+            if (variableRegex.test(selectedText.trim())) {
+                // If the selected text is a valid variable name, treat it as a variable
+                ddStatement = `dd($${selectedText.trim()});`;
             } else {
-                // If no variables are found, log the selected text as a string
-                ddStatement = `dd('${selectedText.trim()}');`;
+                // Extract all variables from the selected text
+                const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
+                const variables = selectedText.match(variableRegex) || [];
+
+                if (variables.length > 1) {
+                    // If multiple variables are found, log them as an array
+                    ddStatement = `dd([${variables.join(', ')}]);`;
+                } else if (variables.length === 1) {
+                    // If only one variable is found, log it directly
+                    ddStatement = `dd(${variables[0]});`;
+                } else {
+                    // If no variables are found, log the selected text as a string
+                    ddStatement = `dd('${selectedText.trim()}');`;
+                }
             }
         }
 
@@ -154,19 +161,26 @@ function logVariable() {
                 }
             }
         } else {
-            // Extract all variables from the selected text
-            const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
-            const variables = selectedText.match(variableRegex) || [];
-
-            if (variables.length > 1) {
-                // If multiple variables are found, log them as an array
-                logStatement = `\\Log::info([${variables.join(', ')}]);`;
-            } else if (variables.length === 1) {
-                // If only one variable is found, log it directly
-                logStatement = `\\Log::info(${variables[0]});`;
+            // Check if the selected text is a valid variable name
+            const variableRegex = /^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
+            if (variableRegex.test(selectedText.trim())) {
+                // If the selected text is a valid variable name, treat it as a variable
+                logStatement = `\\Log::info($${selectedText.trim()});`;
             } else {
-                // If no variables are found, log the selected text as a string
-                logStatement = `\\Log::info('${selectedText.trim()}');`;
+                // Extract all variables from the selected text
+                const variableRegex = /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g;
+                const variables = selectedText.match(variableRegex) || [];
+
+                if (variables.length > 1) {
+                    // If multiple variables are found, log them as an array
+                    logStatement = `\\Log::info([${variables.join(', ')}]);`;
+                } else if (variables.length === 1) {
+                    // If only one variable is found, log it directly
+                    logStatement = `\\Log::info(${variables[0]});`;
+                } else {
+                    // If no variables are found, log the selected text as a string
+                    logStatement = `\\Log::info('${selectedText.trim()}');`;
+                }
             }
         }
 
