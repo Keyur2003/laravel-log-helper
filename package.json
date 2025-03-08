@@ -1,8 +1,8 @@
 {
   "name": "laravel-debug-buddy",
   "displayName": "Laravel Debug Buddy",
-  "description": "A powerful helper for debugging Laravel code with instant logging and dumping.",
-  "version": "3.0.1",
+  "description": "A powerful helper for debugging Laravel code with instant logging, dumping, and execution timing.",
+  "version": "3.0.2",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
@@ -26,6 +26,10 @@
       {
         "command": "laravel-debug-buddy.removeDebugStatements",
         "title": "Remove Debug Statements"
+      },
+      {
+        "command": "laravel-debug-buddy.timeExecution",
+        "title": "Time Execution"
       }
     ],
     "keybindings": [
@@ -46,7 +50,56 @@
         "key": "ctrl+shift+r",
         "mac": "cmd+shift+r",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.timeExecution",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
       }
-    ]
-  }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "laravel-debug-buddy.logVariable",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.ddVariable",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.removeDebugStatements",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.timeExecution",
+          "group": "laravel-debug-buddy"
+        }
+      ]
+    }
+  },
+  "activationEvents": [
+    "onCommand:laravel-debug-buddy.logVariable",
+    "onCommand:laravel-debug-buddy.ddVariable",
+    "onCommand:laravel-debug-buddy.removeDebugStatements",
+    "onCommand:laravel-debug-buddy.timeExecution"
+  ],
+  "categories": [
+    "Debuggers",
+    "Other"
+  ],
+  "keywords": [
+    "laravel",
+    "debug",
+    "logging",
+    "dd",
+    "php",
+    "productivity"
+  ],
+  "bugs": {
+    "url": "https://github.com/Keyur2003/laravel-log-helper/issues"
+  },
+  "homepage": "https://github.com/Keyur2003/laravel-log-helper#readme",
+  "license": "MIT"
 }
