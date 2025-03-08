@@ -1,3 +1,5 @@
+
+
 # Laravel Debug Buddy
 
 Laravel Debug Buddy is a powerful VS Code extension designed to simplify debugging in Laravel applications. It provides quick and easy access to common debugging tasks, such as logging variables, dumping variables, timing code execution, and cleaning up debug statements. With intuitive commands and keyboard shortcuts, this extension enhances productivity and streamlines the debugging process.
@@ -34,98 +36,64 @@ Laravel Debug Buddy is a powerful VS Code extension designed to simplify debuggi
 ## Features
 
 ### Log Variable
-Logs the selected variable or text to the Laravel log file using `Log::info()`. It supports logging single variables, multiple variables, or plain text. If multiple variables are selected, they are logged as an associative array.
-
-#### Usage:
-1. Select the variable(s) or text you want to log.
-2. Right-click and choose **Log Variable** from the context menu, or use the keyboard shortcut:
-   - **Windows/Linux**: `Ctrl+Shift+L`
-   - **Mac**: `Cmd+Shift+L`
+Logs the selected variable or text to the Laravel log file using `Log::info()`. Supports single variables, multiple variables, or plain text.
 
 #### Examples:
-```php
-// Logging a single variable:
-// Before:
-$user = User::find(1);
 
-// After:
+**Single Variable:**
+```php
+$user = User::find(1);
 \Log::info($user);
 ```
 
+**Plain Text:**
 ```php
-// Logging plain text:
-// Before:
 "Hello, World!";
-
-// After:
 \Log::info("Hello, World!");
 ```
 
+**Multiple Variables:**
 ```php
-// Logging multiple variables:
-// Before:
 $user = User::find(1);
 $posts = Post::all();
-
-// After:
 \Log::info(["user" => $user, "posts" => $posts]);
 ```
 
+**String with Variables:**
 ```php
-// Logging a string with variables:
-// Before:
 "User email: {$user->email}";
-
-// After:
 \Log::info("User email: {$user->email}");
 ```
 
 ---
 
 ### DD Variable
-Dumps the selected variable(s) or text using Laravel's `dd()` helper. If multiple variables are selected, they are dumped as an associative array.
-
-#### Usage:
-1. Select the variable(s) or text you want to dump.
-2. Right-click and choose **DD Variable** from the context menu, or use the keyboard shortcut:
-   - **Windows/Linux**: `Ctrl+Shift+D`
-   - **Mac**: `Cmd+Shift+D`
+Dumps the selected variable(s) or text using Laravel's `dd()` helper. Supports single variables, multiple variables, or plain text.
 
 #### Examples:
-```php
-// Dumping a single variable:
-// Before:
-$user = User::find(1);
 
-// After:
+**Single Variable:**
+```php
+$user = User::find(1);
 dd($user);
 ```
 
+**Plain Text:**
 ```php
-// Dumping plain text:
-// Before:
 "Hello, World!";
-
-// After:
 dd("Hello, World!");
 ```
 
+**Multiple Variables:**
 ```php
-// Dumping multiple variables:
-// Before:
 $user = User::find(1);
 $posts = Post::all();
-
-// After:
 dd(["user" => $user, "posts" => $posts]);
 ```
 
+**String with Variables:**
 ```php
-// Dumping a string with variables:
-// Before:
 "User email: {$user->email}";
-
-// After:
 dd("User email: {$user->email}");
 ```
 
@@ -134,32 +102,17 @@ dd("User email: {$user->email}");
 ### Time Execution
 Measures the execution time of a selected code block and logs it using `Log::info()`.
 
-#### Usage:
-1. Select the code block you want to time.
-2. Right-click and choose **Time Execution** from the context menu, or use the keyboard shortcut:
-   - **Windows/Linux**: `Ctrl+Shift+T`
-   - **Mac**: `Cmd+Shift+T`
-
 #### Examples:
-```php
-// Timing a single operation:
-// Before:
-$user = User::find(1);
 
-// After:
+**Single Operation:**
+```php
 $debugBuddyStartTime = now();
 $user = User::find(1);
 \Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");
 ```
 
+**Loop:**
 ```php
-// Timing a loop:
-// Before:
-foreach ($users as $user) {
-    $user->notify(new WelcomeNotification);
-}
-
-// After:
 $debugBuddyStartTime = now();
 foreach ($users as $user) {
     $user->notify(new WelcomeNotification);
@@ -172,36 +125,37 @@ foreach ($users as $user) {
 ### Remove Debug Statements
 Removes all debug statements (`Log::info`, `dd`, `$debugBuddyStartTime`, and execution time logs) from the current file.
 
-#### Usage:
-1. Open the file containing debug statements.
-2. Right-click and choose **Remove Debug Statements** from the context menu, or use the keyboard shortcut:
-   - **Windows/Linux**: `Ctrl+Shift+R`
-   - **Mac**: `Cmd+Shift+R`
-
 #### Examples:
+
+**Before:**
 ```php
-// Before:
 \Log::info($user);
+```
 
-// After:
+**After:**
+```php
 // Removed
 ```
 
+**Before:**
 ```php
-// Before:
 dd($user);
+```
 
-// After:
+**After:**
+```php
 // Removed
 ```
 
+**Before:**
 ```php
-// Before:
 $debugBuddyStartTime = now();
 $user = User::find(1);
 \Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");
+```
 
-// After:
+**After:**
+```php
 $user = User::find(1);
 ```
 
