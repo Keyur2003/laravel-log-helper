@@ -106,18 +106,18 @@ Measures the execution time of a selected code block and logs it using `Log::inf
 
 **Single Operation:**
 ```php
-$debugBuddyStartTime = now();
+$debugBuddyStartTime = microtime(true)
 $user = User::find(1);
-\Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");
+\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms");
 ```
 
 **Loop:**
 ```php
-$debugBuddyStartTime = now();
+$debugBuddyStartTime = microtime(true)
 foreach ($users as $user) {
     $user->notify(new WelcomeNotification);
 }
-\Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");
+\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms");
 ```
 
 ---
