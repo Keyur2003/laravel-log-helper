@@ -20,8 +20,8 @@ function timeExecution() {
     const lastLineIndentation = lastLine.text.match(/^\s*/)[0];
 
     // Generate the timing code with the appropriate indentation
-    const startTimeCode = `${firstLineIndentation}$debugBuddyStartTime = now();\n`;
-    const endTimeCode = `${lastLineIndentation}\\Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");\n`;
+    const startTimeCode = `${firstLineIndentation}$debugBuddyStartTime = microtime(true);\n`;
+    const endTimeCode = `${lastLineIndentation}\\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms");\n`;
 
     // Insert the start time code at the beginning of the selection
     const startPosition = new vscode.Position(selection.start.line, 0);
