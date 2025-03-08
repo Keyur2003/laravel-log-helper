@@ -111,7 +111,7 @@ dd("Debug this message");
 
 ## 🔧 Installation
 
-1. Install the extension from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=KeyurSanghani.laravel-log-helper).
+1. Install the extension from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=KeyurSanghani.laravel-debug-buddy).
 2. Reload Visual Studio Code to activate the extension.
 
 ---
