@@ -2,7 +2,7 @@
   "name": "laravel-debug-buddy",
   "displayName": "Laravel Debug Buddy",
   "description": "A powerful helper for debugging Laravel code with instant logging and dumping.",
-  "version": "2.0.5",
+  "version": "3.0.1",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
