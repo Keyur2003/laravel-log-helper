@@ -2,7 +2,7 @@
   "name": "laravel-debug-buddy",
   "displayName": "Laravel Debug Buddy",
   "description": "A powerful helper for debugging Laravel code with instant logging and dumping.",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
@@ -22,7 +22,11 @@
       {
         "command": "laravel-debug-buddy.ddVariable",
         "title": "DD Variable"
-    }
+      },
+      {
+        "command": "laravel-debug-buddy.removeDebugStatements",
+        "title": "Remove Debug Statements"
+      }
     ],
     "keybindings": [
       {
@@ -36,7 +40,13 @@
         "key": "ctrl+shift+d",
         "mac": "cmd+shift+d",
         "when": "editorTextFocus"
-    }
+      },
+      {
+        "command": "laravel-debug-buddy.removeDebugStatements",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorTextFocus"
+      }
     ]
   }
 }

@@ -1,15 +1,17 @@
 const vscode = require('vscode');
 
 function activate(context) {
-    
+
     let disposableLog = vscode.commands.registerCommand('laravel-debug-buddy.logVariable', logVariable);
 
     let disposableDd = vscode.commands.registerCommand('laravel-debug-buddy.ddVariable', ddVariable);
 
-    context.subscriptions.push(disposableLog, disposableDd);
+    let disposableRemoveDebug = vscode.commands.registerCommand('laravel-debug-buddy.removeDebugStatements', removeDebugStatements);
+
+    context.subscriptions.push(disposableLog, disposableDd, disposableRemoveDebug);
 }
 
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
     activate,
@@ -101,10 +103,10 @@ function ddVariable() {
             if (success && cursorOffsetFromDdStart > -1) {
                 // If cursor needs to be placed between quotes
                 const newPosition = new vscode.Position(
-                    position.line, 
+                    position.line,
                     indentation.length + cursorOffsetFromDdStart
                 );
-                
+
                 // Set the new cursor position
                 editor.selection = new vscode.Selection(newPosition, newPosition);
             }
@@ -197,13 +199,78 @@ function logVariable() {
             if (success && cursorOffsetFromLogStart > -1) {
                 // If cursor needs to be placed between quotes
                 const newPosition = new vscode.Position(
-                    position.line, 
+                    position.line,
                     indentation.length + cursorOffsetFromLogStart
                 );
-                
+
                 // Set the new cursor position
                 editor.selection = new vscode.Selection(newPosition, newPosition);
             }
+        });
+    }
+}
+
+function removeDebugStatements() {
+    const editor = vscode.window.activeTextEditor;
+
+    if (editor) {
+        const document = editor.document;
+        const text = document.getText();
+
+        // Regular expressions to match \Log::info(), Log::info(), and dd() statements
+        const logRegex = /(\s*)\\?Log::info\(.*?\);?\s*/g; // \ is optional
+        const ddRegex = /(\s*)dd\(.*?\);?\s*/g;
+
+        // Split the text into lines
+        const lines = text.split('\n');
+
+        // Track which lines became empty after removing debug statements
+        const linesToRemove = new Set();
+
+        // Process each line to remove debug statements while preserving formatting
+        const newLines = lines.map((line, index) => {
+            const originalLine = line;
+
+            // Remove \Log::info() or Log::info() statements
+            line = line.replace(logRegex, (match, indentation) => {
+                // If the line only contains the debug statement, mark it for removal
+                if (originalLine.trim() === match.trim()) {
+                    linesToRemove.add(index);
+                    return '';
+                }
+                // Otherwise, preserve the indentation and remove the debug statement
+                return indentation;
+            });
+
+            // Remove dd() statements
+            line = line.replace(ddRegex, (match, indentation) => {
+                // If the line only contains the debug statement, mark it for removal
+                if (originalLine.trim() === match.trim()) {
+                    linesToRemove.add(index);
+                    return '';
+                }
+                // Otherwise, preserve the indentation and remove the debug statement
+                return indentation;
+            });
+
+            return line;
+        });
+
+        // Remove lines that became empty due to debug statement removal
+        const finalLines = newLines.filter((line, index) => {
+            // Keep the line if it's not marked for removal or if it's not empty
+            return !linesToRemove.has(index) || line.trim() !== '';
+        });
+
+        // Join the lines back together
+        const newText = finalLines.join('\n');
+
+        // Apply the changes to the document
+        editor.edit((editBuilder) => {
+            const firstLine = document.lineAt(0);
+            const lastLine = document.lineAt(document.lineCount - 1);
+            const textRange = new vscode.Range(firstLine.range.start, lastLine.range.end);
+            editBuilder.replace(textRange, newText);
         });
     }
 }
