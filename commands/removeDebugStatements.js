@@ -12,7 +12,7 @@ function removeDebugStatements() {
     const debugPatterns = [
         /(\s*)\\?Log::info\([^;]*\);?\s*/g, // Matches \Log::info() or Log::info()
         /(\s*)dd\([^;]*\);?\s*/g, // Matches dd()
-        /(\s*)\$debugBuddyStartTime\s*=\s*now\(\);\s*/g, // Matches $debugBuddyStartTime = now();
+       /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*/g, // Matches $debugBuddyStartTime = microtime(true);
         /(\s*)\\?Log::info\("Execution time: " \. now\(\)->diffInMilliseconds\(\$debugBuddyStartTime\) \. "ms"\);\s*/g, // Matches \Log::info("Execution time: ...")
     ];
 
