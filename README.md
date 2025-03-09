@@ -165,10 +165,10 @@ $user = User::find(1);
 
 | Command                  | Windows/Linux       | Mac               |
 |--------------------------|---------------------|-------------------|
-| Log Variable             | `Ctrl+Shift+L`      | `Cmd+Shift+L`     |
-| DD Variable              | `Ctrl+Shift+D`      | `Cmd+Shift+D`     |
-| Time Execution           | `Ctrl+Shift+T`      | `Cmd+Shift+T`     |
-| Remove Debug Statements  | `Ctrl+Shift+R`      | `Cmd+Shift+R`     |
+| Log Variable             | Ctrl+Shift+L        | Cmd+Shift+L       |
+| DD Variable              | Ctrl+Shift+D        | Cmd+Shift+D       |
+| Time Execution           | Ctrl+Shift+T        | Cmd+Shift+T       |
+| Remove Debug Statements  | Ctrl+Shift+R        | Cmd+Shift+R       |
 
 ---
 

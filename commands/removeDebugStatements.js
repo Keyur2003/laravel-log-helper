@@ -10,10 +10,10 @@ function removeDebugStatements() {
 
     // Regular expressions to match debug statements
     const debugPatterns = [
-        /(\s*)\\?Log::info\([^;]*\);?\s*/g, // Matches \Log::info() or Log::info()
+        /(\s*)\\?Log::info\([^;]*\);?\s*\/\/\s*Added by DebugBuddy/g, // Matches \Log::info() or Log::info() with the comment
         /(\s*)dd\([^;]*\);?\s*/g, // Matches dd()
-       /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*/g, // Matches $debugBuddyStartTime = microtime(true);
-        /(\s*)\\?Log::info\("Execution time: " \. now\(\)->diffInMilliseconds\(\$debugBuddyStartTime\) \. "ms"\);\s*/g, // Matches \Log::info("Execution time: ...")
+        /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*\/\/\s*Added by DebugBuddy/g, // Matches $debugBuddyStartTime = microtime(true); with the comment
+        /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*Added by DebugBuddy/g, // Matches \Log::info("Execution time: ...") with the comment
     ];
 
     // Split the text into lines

@@ -39,9 +39,9 @@ function logVariable() {
                 if (excludedVariables.has(variable)) {
                     return;
                 }
-                logStatement = `\\Log::info(${variable});`;
+                logStatement = `\\Log::info(${variable}); // Added by DebugBuddy`;
             } else {
-                logStatement = `\\Log::info("");`;
+                logStatement = `\\Log::info(""); // Added by DebugBuddy`;
                 cursorOffsetFromLogStart = 12;
             }
         }
@@ -62,13 +62,13 @@ function logVariable() {
                     const key = variable.slice(1); // Remove the $ to get the variable name
                     return `"${key}" => ${variable}`; // Format as "keyname" => $value
                 }).join(', ');
-                logStatement = `\\Log::info([${variablePairs}]);`;
+                logStatement = `\\Log::info([${variablePairs}]); // Added by DebugBuddy`;
             } else if (uniqueVariables.size === 1) {
                 const [variable] = uniqueVariables; // Destructure to get the first (and only) variable
                 const key = variable.slice(1); // Remove the $ to get the variable name
-                logStatement = `\\Log::info(["${key}" => ${variable}]);`;
+                logStatement = `\\Log::info(["${key}" => ${variable}]); // Added by DebugBuddy`;
             } else {
-                logStatement = `\\Log::info('${trimmedText}');`;
+                logStatement = `\\Log::info('${trimmedText}'); // Added by DebugBuddy`;
             }
         }
     }
