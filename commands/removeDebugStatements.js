@@ -28,6 +28,27 @@ function removeDebugStatements() {
         // Matches \Log::info("Execution time: ...") with the comment
         /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*Added by DebugBuddy/g,
         /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*added by debugbuddy/g,
+        
+        // Matches any line with "// Added by DebugBuddy" comment
+        /(\s*).*\/\/\s*Added by DebugBuddy.*/g,
+        /(\s*).*\/\/\s*added by debugbuddy.*/g,
+        
+        // Matches DB::listen query logger block
+        /(\s*)\/\/\s*Start query logging[\s\S]*?\/\/\s*End query logging/g,
+        
+        // Matches try-catch blocks added by Exception Catcher
+        /(\s*)try\s*\{[\s\S]*?\\Log::error\([^;]*\);\s*\/\/\s*Added by DebugBuddy[\s\S]*?\}/g,
+        
+        // Matches conditional debugging blocks
+        /(\s*)if\s*\([^)]*\)\s*\{\s*\/\/\s*Conditional debug - Added by DebugBuddy[\s\S]*?\}/g,
+        
+        // Matches method call tracing blocks
+        /(\s*)\/\/\s*Method call tracing[\s\S]*?return \$debugBuddyResult;\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)\/\/\s*Method call tracing wrapper[\s\S]*?\}/g,
+        
+        // Matches request/response logging blocks
+        /(\s*)\/\/\s*Log request data[\s\S]*?\\Log::info\('Request Body[^;]*\);\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)\/\/\s*Log response data[\s\S]*?\\Log::info\('Response Body[^;]*\);\s*\/\/\s*Added by DebugBuddy/g,
     ];
 
     // Split the text into lines

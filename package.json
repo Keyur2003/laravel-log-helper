@@ -2,7 +2,7 @@
   "name": "laravel-debug-buddy",
   "displayName": "Laravel Debug Buddy",
   "description": "A powerful helper for debugging Laravel code with instant logging, dumping, and execution timing.",
-  "version": "5.0.2",
+  "version": "6.0.0",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
@@ -38,6 +38,26 @@
       {
         "command": "laravel-debug-buddy.quickDdVariable",
         "title": "Quick DD Selected Code"
+      },
+      {
+        "command": "laravel-debug-buddy.queryLogger",
+        "title": "Add Query Logger"
+      },
+      {
+        "command": "laravel-debug-buddy.exceptionCatcher",
+        "title": "Wrap with Exception Catcher"
+      },
+      {
+        "command": "laravel-debug-buddy.requestResponseLogger",
+        "title": "Add Request/Response Logger"
+      },
+      {
+        "command": "laravel-debug-buddy.conditionalDebugger",
+        "title": "Add Conditional Debugging"
+      },
+      {
+        "command": "laravel-debug-buddy.methodCallTracer",
+        "title": "Add Method Call Tracer"
       }
     ],
     "keybindings": [
@@ -76,6 +96,36 @@
         "key": "ctrl+shift+w",
         "mac": "cmd+shift+w",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.queryLogger",
+        "key": "ctrl+shift+1",
+        "mac": "cmd+shift+1",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.exceptionCatcher",
+        "key": "ctrl+shift+2",
+        "mac": "cmd+shift+2",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.requestResponseLogger",
+        "key": "ctrl+shift+3",
+        "mac": "cmd+shift+3",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.conditionalDebugger",
+        "key": "ctrl+shift+4",
+        "mac": "cmd+shift+4",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.methodCallTracer",
+        "key": "ctrl+shift+5",
+        "mac": "cmd+shift+5",
+        "when": "editorTextFocus"
       }
     ],
     "menus": {
@@ -103,6 +153,26 @@
         {
           "command": "laravel-debug-buddy.quickDdVariable",
           "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.queryLogger",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.exceptionCatcher",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.requestResponseLogger",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.conditionalDebugger",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.methodCallTracer",
+          "group": "laravel-debug-buddy"
         }
       ]
     }
@@ -113,7 +183,12 @@
     "onCommand:laravel-debug-buddy.removeDebugStatements",
     "onCommand:laravel-debug-buddy.timeExecution",
     "onCommand:laravel-debug-buddy.quickLogVariable",
-    "onCommand:laravel-debug-buddy.quickDdVariable"
+    "onCommand:laravel-debug-buddy.quickDdVariable",
+    "onCommand:laravel-debug-buddy.queryLogger",
+    "onCommand:laravel-debug-buddy.exceptionCatcher",
+    "onCommand:laravel-debug-buddy.requestResponseLogger",
+    "onCommand:laravel-debug-buddy.conditionalDebugger",
+    "onCommand:laravel-debug-buddy.methodCallTracer"
   ],
   "categories": [
     "Debuggers",
