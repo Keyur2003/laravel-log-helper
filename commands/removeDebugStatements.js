@@ -10,10 +10,24 @@ function removeDebugStatements() {
 
     // Regular expressions to match debug statements
     const debugPatterns = [
-        /(\s*)\\?Log::info\([^;]*\);?\s*\/\/\s*Added by DebugBuddy/g, // Matches \Log::info() or Log::info() with the comment
-        /(\s*)dd\([^;]*\);?\s*/g, // Matches dd()
-        /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*\/\/\s*Added by DebugBuddy/g, // Matches $debugBuddyStartTime = microtime(true); with the comment
-        /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*Added by DebugBuddy/g, // Matches \Log::info("Execution time: ...") with the comment
+        // Matches \Log::info() or Log::info() with the comment (both uppercase and lowercase formats)
+        /(\s*)\\?Log::info\([^;]*\);?\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)\\?Log::info\([^;]*\);?\s*\/\/\s*added by debugbuddy/g,
+        
+        // Matches dd() with the comment (both uppercase and lowercase formats)
+        /(\s*)dd\([^;]*\);?\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)dd\([^;]*\);?\s*\/\/\s*added by debugbuddy/g,
+        
+        // Matches dd() without comment (for backward compatibility)
+        /(\s*)dd\([^;]*\);?\s*/g,
+        
+        // Matches $debugBuddyStartTime = microtime(true); with the comment
+        /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)\$debugBuddyStartTime\s*=\s*microtime\s*\(\s*true\s*\);\s*\/\/\s*added by debugbuddy/g,
+        
+        // Matches \Log::info("Execution time: ...") with the comment
+        /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*Added by DebugBuddy/g,
+        /(\s*)\\?Log::info\("Execution time: " \. round\(\s*\(\s*microtime\(\s*true\s*\)\s*-\s*\$debugBuddyStartTime\s*\)\s*\*\s*1000,\s*2\s*\)\s*\.\s*"ms"\s*\);?\s*\/\/\s*added by debugbuddy/g,
     ];
 
     // Split the text into lines

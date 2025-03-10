@@ -19,7 +19,7 @@ function quickLogVariable() {
     const indent = editor.document.lineAt(position.line).text.match(/^\s*/)[0];
 
     editor.edit(editBuilder => {
-        editBuilder.insert(position, `\n${indent}// added by debugbuddy\n${indent}\\Log::info(${text});`);
+        editBuilder.insert(position, `\n${indent}\\Log::info(${text}); // Added by DebugBuddy`);
     });
 }
 

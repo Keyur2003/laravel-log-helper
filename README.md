@@ -112,8 +112,7 @@ $user = User::find(1);
 **After:**
 ```php
 $user = User::find(1);
-// added by debugbuddy
-\Log::info($user);
+\Log::info($user); // Added by DebugBuddy
 ```
 
 ---
@@ -131,8 +130,7 @@ $user = User::find(1);
 **After:**
 ```php
 $user = User::find(1);
-// added by debugbuddy
-dd($user);
+dd($user); // Added by DebugBuddy
 ```
 
 ---
