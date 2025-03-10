@@ -48,9 +48,17 @@ function logVariable() {
     } else {
         const trimmedText = selectedText.trim();
         const variableRegex = /^\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
+        const variableNameRegex = /^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
 
         if (variableRegex.test(trimmedText)) {
-            logStatement = `\\Log::info($${trimmedText});`;
+            logStatement = `\\Log::info(${trimmedText}); // Added by DebugBuddy`;
+        } else if (variableNameRegex.test(trimmedText)) {
+            // If the selected text is a valid variable name (without $), prepend $ to it
+            const variable = `$${trimmedText}`;
+            if (excludedVariables.has(variable)) {
+                return;
+            }
+            logStatement = `\\Log::info(${variable}); // Added by DebugBuddy`;
         } else {
             const variables = selectedText.match(/\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g) || [];
 
