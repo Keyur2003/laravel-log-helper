@@ -48,9 +48,17 @@ function ddVariable() {
     } else {
         const trimmedText = selectedText.trim();
         const variableRegex = /^\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
+        const variableNameRegex = /^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/;
 
         if (variableRegex.test(trimmedText)) {
             ddStatement = `dd(${trimmedText});`;
+        } else if (variableNameRegex.test(trimmedText)) {
+            // If the selected text is a valid variable name (without $), prepend $ to it
+            const variable = `$${trimmedText}`;
+            if (excludedVariables.has(variable)) {
+                return;
+            }
+            ddStatement = `dd(${variable});`;
         } else {
             const variables = selectedText.match(/\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/g) || [];
 
