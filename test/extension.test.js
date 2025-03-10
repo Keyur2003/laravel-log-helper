@@ -22,6 +22,7 @@ class TestClass
 		];
 		$email = "user@example.com";
 		$message = "User email: {$email}";
+		$countryId = Country::where('iso_code', 'US')->first()->id;
 		
 		// Complex operation
 		$result = $this->complexOperation();
@@ -136,10 +137,10 @@ class TestClass
 		// Execute quick log variable command
 		await vscode.commands.executeCommand('laravel-debug-buddy.quickLogVariable');
 		
-		// Check if log statement was added below
+		// Check if log statement was added below the selection
 		const text = document.getText();
-		assert.ok(text.includes('// added by debugbuddy'));
-		assert.ok(text.includes('\\Log::info($email);'));
+		assert.ok(text.includes('$email = "user@example.com";')); // Original text should still be there
+		assert.ok(text.includes('\\Log::info($email); // Added by DebugBuddy')); // Log statement should be added
 	});
 	
 	test('Should quick dd variable', async () => {
@@ -154,10 +155,46 @@ class TestClass
 		// Execute quick dd variable command
 		await vscode.commands.executeCommand('laravel-debug-buddy.quickDdVariable');
 		
-		// Check if dd statement was added below
+		// Check if dd statement was added below the selection
 		const text = document.getText();
-		assert.ok(text.includes('// added by debugbuddy'));
-		assert.ok(text.includes('dd($message);'));
+		assert.ok(text.includes('$message = "User email: {$email}";')); // Original text should still be there
+		assert.ok(text.includes('dd($message); // Added by DebugBuddy')); // DD statement should be added
+	});
+	
+	test('Should quick log complex expression', async () => {
+		const document = await vscode.workspace.openTextDocument(testFilePath);
+		const editor = await vscode.window.showTextDocument(document);
+		
+		// Select the complex expression
+		const startPos = new vscode.Position(13, 19);
+		const endPos = new vscode.Position(13, 58);
+		editor.selection = new vscode.Selection(startPos, endPos);
+		
+		// Execute quick log variable command
+		await vscode.commands.executeCommand('laravel-debug-buddy.quickLogVariable');
+		
+		// Check if log statement was added below the selection
+		const text = document.getText();
+		assert.ok(text.includes('$countryId = Country::where(\\'iso_code\\', \\'US\\')->first()->id;')); // Original text should still be there
+		assert.ok(text.includes('\\Log::info(Country::where(\\'iso_code\\', \\'US\\')->first()->id); // Added by DebugBuddy')); // Log statement should be added
+	});
+	
+	test('Should quick dd complex expression', async () => {
+		const document = await vscode.workspace.openTextDocument(testFilePath);
+		const editor = await vscode.window.showTextDocument(document);
+		
+		// Select the complex expression
+		const startPos = new vscode.Position(13, 19);
+		const endPos = new vscode.Position(13, 58);
+		editor.selection = new vscode.Selection(startPos, endPos);
+		
+		// Execute quick dd variable command
+		await vscode.commands.executeCommand('laravel-debug-buddy.quickDdVariable');
+		
+		// Check if dd statement was added below the selection
+		const text = document.getText();
+		assert.ok(text.includes('$countryId = Country::where(\\'iso_code\\', \\'US\\')->first()->id;')); // Original text should still be there
+		assert.ok(text.includes('dd(Country::where(\\'iso_code\\', \\'US\\')->first()->id); // Added by DebugBuddy')); // DD statement should be added
 	});
 	
 	test('Should remove debug statements', async () => {

@@ -2,7 +2,7 @@
   "name": "laravel-debug-buddy",
   "displayName": "Laravel Debug Buddy",
   "description": "A powerful helper for debugging Laravel code with instant logging, dumping, and execution timing.",
-  "version": "4.0.7",
+  "version": "5.0.1",
   "publisher": "KeyurSanghani",
   "icon": "images/logo.png",
   "repository": {
@@ -33,11 +33,11 @@
       },
       {
         "command": "laravel-debug-buddy.quickLogVariable",
-        "title": "Quick Log Variable"
+        "title": "Quick Log Selected Code"
       },
       {
         "command": "laravel-debug-buddy.quickDdVariable",
-        "title": "Quick DD Variable"
+        "title": "Quick DD Selected Code"
       }
     ],
     "keybindings": [

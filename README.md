@@ -11,8 +11,8 @@ Laravel Debug Buddy is a powerful VS Code extension designed to simplify debuggi
    - [DD Variable](#dd-variable)
    - [Time Execution](#time-execution)
    - [Remove Debug Statements](#remove-debug-statements)
-   - [Quick Log Variable](#quick-log-variable)
-   - [Quick DD Variable](#quick-dd-variable)
+   - [Quick Log Selected Code](#quick-log-selected-code)
+   - [Quick DD Selected Code](#quick-dd-selected-code)
 3. [Keyboard Shortcuts](#keyboard-shortcuts)
 4. [Contributing](#contributing)
 5. [Support](#support)
@@ -99,38 +99,38 @@ dd("User email: {$user->email}");
 
 ---
 
-### Quick Log Variable
-Quickly logs the selected variable or text below the selection without modifying the original code.
+### Quick Log Selected Code
+Quickly logs the selected code or expression below the current line without modifying the original code. This is perfect for logging complex expressions or code blocks.
 
 #### Examples:
 
-**Before:**
+**Before (with selected code):**
 ```php
-$user = User::find(1);
+$countryId = Country::where('iso_code', 'US')->first()->id;
 ```
 
 **After:**
 ```php
-$user = User::find(1);
-\Log::info($user); // Added by DebugBuddy
+$countryId = Country::where('iso_code', 'US')->first()->id;
+\Log::info(Country::where('iso_code', 'US')->first()->id); // Added by DebugBuddy
 ```
 
 ---
 
-### Quick DD Variable
-Quickly dumps the selected variable or text below the selection without modifying the original code.
+### Quick DD Selected Code
+Quickly dumps and dies with the selected code or expression below the current line without modifying the original code. This is perfect for inspecting complex expressions or code blocks.
 
 #### Examples:
 
-**Before:**
+**Before (with selected code):**
 ```php
-$user = User::find(1);
+$countryId = Country::where('iso_code', 'US')->first()->id;
 ```
 
 **After:**
 ```php
-$user = User::find(1);
-dd($user); // Added by DebugBuddy
+$countryId = Country::where('iso_code', 'US')->first()->id;
+dd(Country::where('iso_code', 'US')->first()->id); // Added by DebugBuddy
 ```
 
 ---
@@ -205,8 +205,8 @@ $user = User::find(1);
 | DD Variable              | Ctrl+Shift+D        | Cmd+Shift+D       |
 | Time Execution           | Ctrl+Shift+T        | Cmd+Shift+T       |
 | Remove Debug Statements  | Ctrl+Shift+R        | Cmd+Shift+R       |
-| Quick Log Variable       | Ctrl+Shift+Q        | Cmd+Shift+Q       |
-| Quick DD Variable        | Ctrl+Shift+W        | Cmd+Shift+W       |
+| Quick Log Selected Code  | Ctrl+Shift+Q        | Cmd+Shift+Q       |
+| Quick DD Selected Code   | Ctrl+Shift+W        | Cmd+Shift+W       |
 
 ---
 

@@ -11,15 +11,21 @@ function quickDdVariable() {
     const text = editor.document.getText(selection);
 
     if (!text) {
-        vscode.window.showErrorMessage('Please select some text to dump');
+        vscode.window.showErrorMessage('Please select some code to dump');
         return;
     }
 
-    const position = selection.end;
-    const indent = editor.document.lineAt(position.line).text.match(/^\s*/)[0];
+    // Get the line of the end of the selection
+    const endLine = selection.end.line;
+    const endLineText = editor.document.lineAt(endLine).text;
+    const indent = endLineText.match(/^\s*/)[0];
+    
+    // Create a position at the end of the line
+    const endOfLine = new vscode.Position(endLine, editor.document.lineAt(endLine).range.end.character);
 
     editor.edit(editBuilder => {
-        editBuilder.insert(position, `\n${indent}dd(${text}); // Added by DebugBuddy`);
+        // Add the dd statement on the next line with the same indentation
+        editBuilder.insert(endOfLine, `\n${indent}dd(${text}); // Added by DebugBuddy`);
     });
 }
 
