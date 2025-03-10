@@ -30,6 +30,14 @@
       {
         "command": "laravel-debug-buddy.timeExecution",
         "title": "Time Execution"
+      },
+      {
+        "command": "laravel-debug-buddy.quickLogVariable",
+        "title": "Quick Log Variable"
+      },
+      {
+        "command": "laravel-debug-buddy.quickDdVariable",
+        "title": "Quick DD Variable"
       }
     ],
     "keybindings": [
@@ -56,6 +64,18 @@
         "key": "ctrl+shift+t",
         "mac": "cmd+shift+t",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.quickLogVariable",
+        "key": "ctrl+shift+q",
+        "mac": "cmd+shift+q",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "laravel-debug-buddy.quickDdVariable",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w",
+        "when": "editorTextFocus"
       }
     ],
     "menus": {
@@ -75,6 +95,14 @@
         {
           "command": "laravel-debug-buddy.timeExecution",
           "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.quickLogVariable",
+          "group": "laravel-debug-buddy"
+        },
+        {
+          "command": "laravel-debug-buddy.quickDdVariable",
+          "group": "laravel-debug-buddy"
         }
       ]
     }
@@ -83,7 +111,9 @@
     "onCommand:laravel-debug-buddy.logVariable",
     "onCommand:laravel-debug-buddy.ddVariable",
     "onCommand:laravel-debug-buddy.removeDebugStatements",
-    "onCommand:laravel-debug-buddy.timeExecution"
+    "onCommand:laravel-debug-buddy.timeExecution",
+    "onCommand:laravel-debug-buddy.quickLogVariable",
+    "onCommand:laravel-debug-buddy.quickDdVariable"
   ],
   "categories": [
     "Debuggers",

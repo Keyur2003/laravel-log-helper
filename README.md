@@ -1,5 +1,3 @@
-
-
 # Laravel Debug Buddy
 
 Laravel Debug Buddy is a powerful VS Code extension designed to simplify debugging in Laravel applications. It provides quick and easy access to common debugging tasks, such as logging variables, dumping variables, timing code execution, and cleaning up debug statements. With intuitive commands and keyboard shortcuts, this extension enhances productivity and streamlines the debugging process.
@@ -13,6 +11,8 @@ Laravel Debug Buddy is a powerful VS Code extension designed to simplify debuggi
    - [DD Variable](#dd-variable)
    - [Time Execution](#time-execution)
    - [Remove Debug Statements](#remove-debug-statements)
+   - [Quick Log Variable](#quick-log-variable)
+   - [Quick DD Variable](#quick-dd-variable)
 3. [Keyboard Shortcuts](#keyboard-shortcuts)
 4. [Contributing](#contributing)
 5. [Support](#support)
@@ -43,26 +43,26 @@ Logs the selected variable or text to the Laravel log file using `Log::info()`. 
 **Single Variable:**
 ```php
 $user = User::find(1);
-\Log::info($user);
+\Log::info($user); // Added by DebugBuddy
 ```
 
 **Plain Text:**
 ```php
 "Hello, World!";
-\Log::info("Hello, World!");
+\Log::info("Hello, World!"); // Added by DebugBuddy
 ```
 
 **Multiple Variables:**
 ```php
 $user = User::find(1);
 $posts = Post::all();
-\Log::info(["user" => $user, "posts" => $posts]);
+\Log::info(["user" => $user, "posts" => $posts]); // Added by DebugBuddy
 ```
 
 **String with Variables:**
 ```php
 "User email: {$user->email}";
-\Log::info("User email: {$user->email}");
+\Log::info("User email: {$user->email}"); // Added by DebugBuddy
 ```
 
 ---
@@ -99,6 +99,44 @@ dd("User email: {$user->email}");
 
 ---
 
+### Quick Log Variable
+Quickly logs the selected variable or text below the selection without modifying the original code.
+
+#### Examples:
+
+**Before:**
+```php
+$user = User::find(1);
+```
+
+**After:**
+```php
+$user = User::find(1);
+// added by debugbuddy
+\Log::info($user);
+```
+
+---
+
+### Quick DD Variable
+Quickly dumps the selected variable or text below the selection without modifying the original code.
+
+#### Examples:
+
+**Before:**
+```php
+$user = User::find(1);
+```
+
+**After:**
+```php
+$user = User::find(1);
+// added by debugbuddy
+dd($user);
+```
+
+---
+
 ### Time Execution
 Measures the execution time of a selected code block and logs it using `Log::info()`.
 
@@ -106,18 +144,18 @@ Measures the execution time of a selected code block and logs it using `Log::inf
 
 **Single Operation:**
 ```php
-$debugBuddyStartTime = microtime(true)
+$debugBuddyStartTime = microtime(true); // Added by DebugBuddy
 $user = User::find(1);
-\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms");
+\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms"); // Added by DebugBuddy
 ```
 
 **Loop:**
 ```php
-$debugBuddyStartTime = microtime(true)
+$debugBuddyStartTime = microtime(true); // Added by DebugBuddy
 foreach ($users as $user) {
     $user->notify(new WelcomeNotification);
 }
-\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms");
+\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms"); // Added by DebugBuddy
 ```
 
 ---
@@ -129,7 +167,7 @@ Removes all debug statements (`Log::info`, `dd`, `$debugBuddyStartTime`, and exe
 
 **Before:**
 ```php
-\Log::info($user);
+\Log::info($user); // Added by DebugBuddy
 ```
 
 **After:**
@@ -149,9 +187,9 @@ dd($user);
 
 **Before:**
 ```php
-$debugBuddyStartTime = now();
+$debugBuddyStartTime = microtime(true); // Added by DebugBuddy
 $user = User::find(1);
-\Log::info("Execution time: " . now()->diffInMilliseconds($debugBuddyStartTime) . "ms");
+\Log::info("Execution time: " . round((microtime(true) - $debugBuddyStartTime) * 1000, 2) . "ms"); // Added by DebugBuddy
 ```
 
 **After:**
@@ -169,12 +207,14 @@ $user = User::find(1);
 | DD Variable              | Ctrl+Shift+D        | Cmd+Shift+D       |
 | Time Execution           | Ctrl+Shift+T        | Cmd+Shift+T       |
 | Remove Debug Statements  | Ctrl+Shift+R        | Cmd+Shift+R       |
+| Quick Log Variable       | Ctrl+Shift+Q        | Cmd+Shift+Q       |
+| Quick DD Variable        | Ctrl+Shift+W        | Cmd+Shift+W       |
 
 ---
 
 ## Contributing
 
-We welcome contributions to improve Laravel Debug Buddy! Here’s how you can contribute:
+We welcome contributions to improve Laravel Debug Buddy! Here's how you can contribute:
 
 1. **Fork the Repository**:  
    [Fork the repository on GitHub](https://github.com/Keyur2003/laravel-log-helper).
